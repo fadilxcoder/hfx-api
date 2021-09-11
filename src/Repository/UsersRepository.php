@@ -85,6 +85,33 @@ class UsersRepository extends Repository
         ]);
     }
 
+    public function updateUser(array $user)
+    {
+        $query = '
+            UPDATE
+                `hfx_users`
+            SET
+                uuid = :uuid,
+                username = :username,
+                name = :name,
+                address = :address,
+                job = :job,
+                card = :card
+            WHERE
+                id_user = :id
+        ';
+
+        $this->db->update($query, [
+            'uuid' => $user['uuid'],
+            'username' => $user['username'],
+            'name' => $user['name'],
+            'address' => $user['address'],
+            'job' => $user['job'],
+            'card' => $user['card'],
+            'id' => $user['id'],
+        ]);
+    }
+
     public function createTable()
     {
         $query = '

@@ -16,6 +16,7 @@ class Router
                 $r->addRoute('GET', '/users/{id:\d+}',  [UserController::class, 'getItem']);
                 $r->addRoute('POST', '/users',  [UserController::class, 'createItem']);
                 $r->addRoute('DELETE', '/users/{id:\d+}',  [UserController::class, 'deleteItem']);
+                $r->addRoute('PUT', '/users/{id:\d+}',  [UserController::class, 'updateItem']);
             });
 
         });

@@ -61,4 +61,32 @@ class UserController extends Controller
             ],
         ]);
     }
+
+    public function updateItem(UsersRepository $userRepository, $id)
+    {
+        $input = $this->postJson();
+        $user = $userRepository->getUser($id);
+
+        if(!$user) {
+            return $this->notFoundResponse();
+        }
+
+        if(is_array($input)) {
+            $userRepository->updateUser([
+                'uuid' => $input['uuid'],
+                'username' => $input['username'],
+                'name' => $input['name'],
+                'address' => $input['address'],
+                'job' => $input['job'],
+                'card' => $input['card'],
+                'id' => $id,
+            ]);
+
+            return $this->jsonResponse([
+                'body' => [
+                    'message' => 'User updated !',
+                ],
+            ]);
+        }
+    }
 }
