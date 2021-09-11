@@ -17,15 +17,68 @@ class Controller
         $this->twigEnv = $twigEnv;
     }
 
-    public function jsonResponse($response)
+    protected function jsonResponse($response)
     {
         $this->headers();
+        $httpStatusHeader = 'HTTP/1.1 200 OK';
         
         if (isset($response['status_code_header'])) {
-            header($response['status_code_header']);
+            $httpStatusHeader = $response['status_code_header'];
+        } 
+
+        header($httpStatusHeader);
+        echo json_encode($response['body']);
+    }
+
+    protected function postJson()
+    {
+        $jsonBody = json_decode(file_get_contents('php://input'), TRUE);
+
+        if (null === $jsonBody) {
+            return $this->unprocessableEntityResponse();
         }
 
-        echo json_encode($response['body']);
+        return (array) $jsonBody;
+    }
+
+    protected function notFoundResponse()
+    {
+        $this->jsonResponse([
+            'status_code_header' => 'HTTP/1.1 404 Not Found',
+            'body' => [
+                'key' => 'error.not.found.response' 
+            ],
+        ]);
+    }
+
+    protected function unprocessableEntityResponse()
+    {
+        $this->jsonResponse([
+            'status_code_header' => 'HTTP/1.1 422 Unprocessable Entity',
+            'body' => [
+                'key' => 'error.invalid.json.input' 
+            ],
+        ]);
+    }
+
+    protected function createdJson()
+    {
+        $this->jsonResponse([
+            'status_code_header' => 'HTTP/1.1 201 Created',
+            'body' => [
+                'key' => 'success.json.entry.create'
+            ],
+        ]);
+    }
+
+    protected function unknownError()
+    {
+        $this->jsonResponse([
+            'status_code_header' => 'HTTP/1.1 418  I\'m a teapot',
+            'body' => [
+                'key' => 'error.unknown.response'
+            ],
+        ]);
     }
 
     private function headers()

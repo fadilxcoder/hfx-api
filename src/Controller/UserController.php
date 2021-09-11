@@ -16,8 +16,32 @@ class UserController extends Controller
 
     public function getItem(UsersRepository $userRepository, $id)
     {
+        $user = $userRepository->getUser($id);
+
+        if(!$user) {
+            return $this->notFoundResponse();
+        }
+
         return $this->jsonResponse([
-            'body' => $userRepository->getUser($id),
+            'body' => $user,
         ]);
+    }
+
+    public function createItem(UsersRepository $usersRepository)
+    {
+        $input = $this->postJson();
+
+        if(is_array($input)) {
+            $usersRepository->insertUser([
+                'uuid' => $input['uuid'],
+                'username' => $input['username'],
+                'name' => $input['name'],
+                'address' => $input['address'],
+                'job' => $input['job'],
+                'card' => $input['card']
+            ]);
+
+            return $this->createdJson();
+        }
     }
 }

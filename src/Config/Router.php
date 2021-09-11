@@ -14,6 +14,7 @@ class Router
             $routes->addGroup('/v1', function (RouteCollector $r) {
                 $r->addRoute('GET', '/users',  [UserController::class, 'getCollection']);
                 $r->addRoute('GET', '/users/{id:\d+}',  [UserController::class, 'getItem']);
+                $r->addRoute('POST', '/users',  [UserController::class, 'createItem']);
             });
 
         });
