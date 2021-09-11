@@ -16,6 +16,7 @@
 - **GET** http://dev.api.hfx.local/v1/users
 - **GET** http://dev.api.hfx.local/v1/users/3
 - **POST** http://dev.api.hfx.local/v1/users
+- **DELETE** http://dev.api.hfx.local/v1/users/17
 
 # Notes
 

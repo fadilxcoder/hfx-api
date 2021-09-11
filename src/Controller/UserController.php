@@ -44,4 +44,21 @@ class UserController extends Controller
             return $this->createdJson();
         }
     }
+
+    public function deleteItem(UsersRepository $userRepository, $id)
+    {
+        $user = $userRepository->getUser($id);
+
+        if(!$user) {
+            return $this->notFoundResponse();
+        }
+
+        $userRepository->deleteUser($id);
+
+        return $this->jsonResponse([
+            'body' => [
+                'message' => 'User deleted !',
+            ],
+        ]);
+    }
 }

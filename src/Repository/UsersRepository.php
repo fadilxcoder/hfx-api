@@ -69,6 +69,22 @@ class UsersRepository extends Repository
         ]);
     }
 
+    public function deleteUser($id)
+    {
+        $query = '
+            DELETE 
+                u
+            FROM 
+                `hfx_users` u
+            WHERE
+                u.id_user = :id
+        ';
+
+        $this->db->update($query, [
+            'id' => $id
+        ]);
+    }
+
     public function createTable()
     {
         $query = '
