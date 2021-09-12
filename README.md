@@ -17,11 +17,13 @@
 - **GET** http://dev.api.hfx.local/v1/users/3
 - **POST** http://dev.api.hfx.local/v1/users
 - **DELETE** http://dev.api.hfx.local/v1/users/17
+- **PUT** http://dev.api.hfx.local/v1/users/25
 
 # Notes
 
 - Use **double quotes** when sending JSON body when doing a POST
 - https://en.wikipedia.org/wiki/List_of_HTTP_status_codes (List of HTTP status codes)
+- https://packagist.org/packages/nikic/fast-route Fast request router for PHP documentation
 - POST input data format :
 ```
 {
