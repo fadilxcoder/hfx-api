@@ -2,19 +2,39 @@
 
 namespace App\Core;
 
+use App\Commands\EncryptCommand;
 use \Twig\Environment;
 use App\Core\Twig as TwigEnv;
+use Exception;
 
 class Controller
 {
-    private $twig, $twigEnv;
+    private $twig, $twigEnv, $encryptor;
 
     public function __construct(
         Environment $twig, 
-        TwigEnv $twigEnv
+        TwigEnv $twigEnv,
+        EncryptCommand $encryptor
     ) {
         $this->twig = $twig;
         $this->twigEnv = $twigEnv;
+
+        try {
+            $headers = getallheaders();
+            if(!isset($headers['Authorization'])) {
+                throw new Exception('Authorization Bearer is missing in headers !');
+            }
+
+            $authBearer = $headers['Authorization'];
+
+            if ($authBearer !== $encryptor->getEncryptString()) {
+                throw new Exception('Authorization Bearer is invalid !');
+            }
+
+        } catch (Exception $e) {
+            dump($e->getMessage());
+            exit;
+        }
     }
 
     protected function jsonResponse($response)
