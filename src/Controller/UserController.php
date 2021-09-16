@@ -7,6 +7,11 @@ use App\Repository\UsersRepository;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return null;
+    }
+
     public function getCollection(UsersRepository $userRepository)
     {
         return $this->jsonResponse([

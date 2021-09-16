@@ -19,6 +19,8 @@ class Controller
         $this->twig = $twig;
         $this->twigEnv = $twigEnv;
 
+        $this->headers();
+
         try {
             $headers = getallheaders();
             if(!isset($headers['Authorization'])) {
@@ -39,7 +41,6 @@ class Controller
 
     protected function jsonResponse($response)
     {
-        $this->headers();
         $httpStatusHeader = 'HTTP/1.1 200 OK';
         
         if (isset($response['status_code_header'])) {
