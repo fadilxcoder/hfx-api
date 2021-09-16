@@ -35,9 +35,9 @@ class EncryptCommand
     private function operation()
     {
         $obj = new \stdClass();
-        $obj->name = 'Fadil Xcoder';
-        $obj->email = 'fadil@xcoder.dvlpr';
-        $obj->idx = '6LX8224JXXYQ740T';
+        $obj->name = $_ENV['API_USER_NAME'];
+        $obj->email = $_ENV['API_USER_EMAIL'];
+        $obj->idx = $_ENV['API_USER_IDX'];
 
         $objToStrng = json_encode($obj);
 
