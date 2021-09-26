@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Controller;
 use App\Repository\UsersRepository;
+use Evenement\EventEmitter;
 
 class UserController extends Controller
 {
@@ -12,10 +13,13 @@ class UserController extends Controller
         return null;
     }
 
-    public function getCollection(UsersRepository $userRepository)
+    public function getCollection(UsersRepository $userRepository, EventEmitter $emitter)
     {
+        $users = $userRepository->getUsers();
+        $emitter->emit('user.display', [$users]);
+
         return $this->jsonResponse([
-            'body' => $userRepository->getUsers(),
+            'body' => $users,
         ]);
     }
 

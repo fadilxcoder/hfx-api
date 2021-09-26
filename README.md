@@ -38,3 +38,6 @@
 - https://onlinestringtools.com/generate-random-string (Random keys string generator)
 - Authorization Bearer verification in `Controller.php` & bearer creation in `EncryptCommand.php`
 - Use command `php bin/console openssl:keys encrypt` to display Authorization Bearer
+
+- https://packagist.org/packages/evenement/evenement (Événement is a very simple event dispatching library for PHP)
+- `composer require evenement/evenement`

@@ -2,10 +2,12 @@
 
 namespace App\Core;
 
-use App\Commands\EncryptCommand;
+use Exception;
+use Tracy\Debugger;
 use \Twig\Environment;
 use App\Core\Twig as TwigEnv;
-use Exception;
+use App\Commands\EncryptCommand;
+use App\Events\UserEvents;
 
 class Controller
 {
@@ -14,7 +16,8 @@ class Controller
     public function __construct(
         Environment $twig, 
         TwigEnv $twigEnv,
-        EncryptCommand $encryptor
+        EncryptCommand $encryptor,
+        UserEvents $userEvts
     ) {
         $this->twig = $twig;
         $this->twigEnv = $twigEnv;
@@ -47,7 +50,9 @@ class Controller
             $httpStatusHeader = $response['status_code_header'];
         } 
 
+        header("Content-Type: application/json; charset=UTF-8"); # Jsonify the response for display
         header($httpStatusHeader);
+        Debugger::$showBar = false; # Disable bottom popin debugger bar
         echo json_encode($response['body']);
     }
 
@@ -105,7 +110,6 @@ class Controller
     private function headers()
     {
         header("Access-Control-Allow-Origin: *");
-        header("Content-Type: application/json; charset=UTF-8");
         header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
         header("Access-Control-Max-Age: 3600");
         header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
