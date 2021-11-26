@@ -21,6 +21,7 @@
 
 # Notes
 
+- Expose online over secure tunnels : `./ngrok.sh`
 - Use **double quotes** when sending JSON body when doing a POST
 - https://en.wikipedia.org/wiki/List_of_HTTP_status_codes (List of HTTP status codes)
 - https://packagist.org/packages/nikic/fast-route Fast request router for PHP documentation
@@ -41,3 +42,9 @@
 
 - https://packagist.org/packages/evenement/evenement (Événement is a very simple event dispatching library for PHP)
 - `composer require evenement/evenement`
+
+# Prod deploy
+
+- Run `./ngrok.sh`
+- Copy the *Forwarding Address` to the reverse proxy `.env` for the `API_SERVER` value
+- Deploy reverse proxy to heroku
