@@ -2,21 +2,26 @@
 
 namespace App\Controller;
 
+use Monolog\Logger;
 use App\Core\Controller;
-use App\Repository\UsersRepository;
 use Evenement\EventEmitter;
+use App\Repository\UsersRepository;
 
 class UserController extends Controller
 {
+
+
     public function index()
     {
         return null;
     }
 
-    public function getCollection(UsersRepository $userRepository, EventEmitter $emitter)
+    public function getCollection(UsersRepository $userRepository, EventEmitter $emitter, Logger $logger)
     {
         $users = $userRepository->getUsers();
         $emitter->emit('user.display', [$users]);
+
+        $logger->info($_SERVER['HTTP_USER_AGENT']);
 
         return $this->jsonResponse([
             'body' => $users,
