@@ -9,7 +9,20 @@ use App\Repository\UsersRepository;
 
 class UserController extends Controller
 {
+    private function getDevice()
+    {
+        $isMobile = (bool) preg_match(
+            '/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up.browser|up.link|webos|wos)/i',
+            $_SERVER['HTTP_USER_AGENT'] ?? ''
+            ) ? true : false
+        ;
 
+        $device = ($isMobile) ? 'Mobile' : 'Not Mobile';
+        $obj = new \stdClass();
+        $obj->name = $device;
+        
+        return $obj;
+    }
 
     public function index()
     {
@@ -19,9 +32,11 @@ class UserController extends Controller
     public function getCollection(UsersRepository $userRepository, EventEmitter $emitter, Logger $logger)
     {
         $users = $userRepository->getUsers();
-        $emitter->emit('user.display', [$users]);
 
+        $emitter->emit('user.display', [$users]);
         $logger->info($_SERVER['HTTP_USER_AGENT']);
+
+        array_push($users, $this->getDevice());
 
         return $this->jsonResponse([
             'body' => $users,
