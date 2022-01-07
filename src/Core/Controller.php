@@ -26,8 +26,16 @@ class Controller
 
         try {
             $headers = getallheaders();
+
+            # Forcing headers to start with capital letter
+            $headerArr = [];
+            foreach ($headers as $key => $value) {
+                $headerArr[ucfirst($key)] = $value;
+            }
+            $headers = $headerArr;
+
             if(!isset($headers['Authorization'])) {
-                throw new Exception('Authorization Bearer is missing in headers !');
+                throw new Exception('Authorization Bearer is missing in headersx !');
             }
 
             $authBearer = $headers['Authorization'];
