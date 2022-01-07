@@ -53,4 +53,5 @@
 
 - Launch app by `php -S 127.0.0.1:3052 -t public/`
 - Port forward app `lt --port 3052 --subdomain api-hfx`
+- **OR** `lt --port 80 --local-host dev.api.hfx.local --subdomain api-hfx` - Single command
 - Static HTML -> Reverse proxy -> *https://api-hfx.loca.lt/* (Local development)
