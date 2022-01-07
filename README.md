@@ -48,3 +48,9 @@
 - Run `./ngrok.sh`
 - Copy the *Forwarding Address` to the reverse proxy `.env` for the `API_SERVER` value
 - Deploy reverse proxy to heroku
+
+# Tunnel 
+
+- Launch app by `php -S 127.0.0.1:3052 -t public/`
+- Port forward app `lt --port 3052 --subdomain api-hfx`
+- Static HTML -> Reverse proxy -> *https://api-hfx.loca.lt/* (Local development)
