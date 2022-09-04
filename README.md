@@ -43,14 +43,10 @@
 - https://packagist.org/packages/evenement/evenement (Événement is a very simple event dispatching library for PHP)
 - `composer require evenement/evenement`
 
-# Prod deploy
-
-- Run `./ngrok.sh`
-- Copy the *Forwarding Address` to the reverse proxy `.env` for the `API_SERVER` value
-- Deploy reverse proxy to heroku
-
 # Tunnel 
 
+
+- **Static** Crypto.js  [https://github.com/fadilxcoder/cryoto-js.git] --> **PHP** Reverse proxy [https://github.com/fadilxcoder/reverse-proxy.git] --> **PHP** HFX Api server
 - Launch app by `php -S 127.0.0.1:3052 -t public/`
 - Port forward app `lt --port 3052 --subdomain api-hfx`
 - **OR** `lt --port 80 --local-host dev.api.hfx.local --subdomain api-hfx` - Single command

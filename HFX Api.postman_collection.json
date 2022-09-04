@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "3f198efa-eeab-4b7c-9119-f5f00e8d0dae",
+		"name": "HFX Api",
+		"description": "[https://github.com/fadilxcoder/hfx-api](https://github.com/fadilxcoder/hfx-api)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18647677"
+	},
+	"item": [
+		{
+			"name": "/users/11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Index response value check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id_user).to.eql(pm.environment.get(\"index_value\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// var random = Math.random().toString(36).substring(2);\r",
+							"var idx = 11;\r",
+							"\r",
+							"pm.environment.set(\"index_value\", idx.toString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}{{VERSION}}/users/11",
+					"host": [
+						"{{BASE_URL}}{{VERSION}}"
+					],
+					"path": [
+						"users",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}{{VERSION}}/users",
+					"host": [
+						"{{BASE_URL}}{{VERSION}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uuid\": \"XXXXXXXXXXX-XXX-XXXX-XXXX-XXXXXXXXXXXX\",\r\n  \"username\": \"fadilxcoder\",\r\n  \"name\": \"FADIL X\",\r\n  \"address\": \"1285 Schumm Forks South Shyanne, DE 86167\",\r\n  \"job\": \"Web Architect\",\r\n  \"card\": \"MasterCard\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{VERSION}}/users",
+					"host": [
+						"{{BASE_URL}}{{VERSION}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/27",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uuid\": \"1111111-1111-1111-ac56-35590a70e39f\",\r\n  \"username\": \"fadilxcoder\",\r\n  \"name\": \"FX\",\r\n  \"address\": \"8989 Schumm Forks South Shyanne, DE 86167\",\r\n  \"job\": \"Web Architect\",\r\n  \"card\": \"MasterCard\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{VERSION}}/users/27",
+					"host": [
+						"{{BASE_URL}}{{VERSION}}"
+					],
+					"path": [
+						"users",
+						"27"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/26",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uuid\": \"1111111-1111-1111-ac56-35590a70e39f\",\r\n  \"username\": \"fadilxcoder\",\r\n  \"name\": \"FX\",\r\n  \"address\": \"8989 Schumm Forks South Shyanne, DE 86167\",\r\n  \"job\": \"Web Architect\",\r\n  \"card\": \"MasterCard\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}{{VERSION}}/users/26",
+					"host": [
+						"{{BASE_URL}}{{VERSION}}"
+					],
+					"path": [
+						"users",
+						"26"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "icAESDk4FQYhhubVwCPExcnax7VMUxfHJlbrbGKg3cXBRg2ZqHRf8uXk9hOnSFVlcsuerf1+62RxmZVrXS4n1UqBiv8ruZnj00BMWnOa5u0=",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://dev.api.hfx.local/"
+		},
+		{
+			"key": "VERSION",
+			"value": "v1"
+		}
+	]
+}
